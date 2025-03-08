@@ -1,7 +1,9 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import TrackCard from "./TrackCard";
 
-const SongResults = ({ searchQuery, authToken, searchResults, setSongResults, onSongSelect }) => {
+const SongResults = ({ searchQuery, authToken, onSongSelect }) => {
+    const [searchResults, setSongResults] = useState([]);
+
     useEffect(() => {
         if (!authToken || !searchQuery) return;
 
@@ -16,7 +18,7 @@ const SongResults = ({ searchQuery, authToken, searchResults, setSongResults, on
         };
 
         searchSpotify();
-    }, [searchQuery, authToken, setSongResults]);
+    }, [searchQuery, authToken]);
 
     return (
         <div>

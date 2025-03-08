@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { SPOTIFY_CONFIG } from "../config/config";
 
 // Spotify API Credentials
-const CLIENT_ID = "406768425e1a47b9bc6980251b59e54d"; // Replace with your Client ID
-const CLIENT_SECRET = "9f5c6926cce342c781f2447cf87656eb";
+const CLIENT_ID = SPOTIFY_CONFIG.CLIENT_ID; // Replace with your Client ID
+const CLIENT_SECRET = SPOTIFY_CONFIG.CLIENT_SECRET;
 
 // Fetch client access token for public use
 export const useClientToken = () => {

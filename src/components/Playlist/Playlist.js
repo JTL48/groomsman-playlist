@@ -4,6 +4,7 @@ import Header from "../Header";
 import SpotifyEmbed from "./SpotifyEmbed";
 import TrackControls from "./TrackControls";
 import TrackDetails from "./TrackDetails";
+import { SPOTIFY_CONFIG } from "../../config/config";
 
 const Playlist = () => {
     const [tracks, setTracks] = useState([]);
@@ -16,7 +17,7 @@ const Playlist = () => {
 
         const fetchPlaylist = async () => {
             try {
-                const response = await fetch("https://api.spotify.com/v1/playlists/2RJyA0nTh20hAK2zbSiZON", {
+                const response = await fetch(`https://api.spotify.com/v1/playlists/${SPOTIFY_CONFIG.PLAYLIST_ID}`, {
                     headers: { Authorization: `Bearer ${clientToken}` },
                 });
 
@@ -40,10 +41,7 @@ const Playlist = () => {
 
         if (selectedTrack) {
             setCurrentTrack({
-                name: selectedTrack.track.name,
-                artists: selectedTrack.track.artists.map(artist => artist.name).join(", "),
-                album: selectedTrack.track.album.name,
-                imageUrl: selectedTrack.track.album.images[0].url,
+                song: selectedTrack.track,
                 index: tracks.findIndex(track => track.track.id === trackId),
             });
         }
@@ -69,7 +67,7 @@ const Playlist = () => {
         <div>
             <Header />
             <div style={{ display: "flex", justifyContent: "space-between", padding: "20px" }}>
-                <SpotifyEmbed playlistId="2RJyA0nTh20hAK2zbSiZON" />
+                <SpotifyEmbed playlistId={SPOTIFY_CONFIG.PLAYLIST_ID} />
                 <div style={{ flex: 1, marginLeft: "20px", textAlign: "center" }}>
                     <TrackControls
                         tracks={tracks}
