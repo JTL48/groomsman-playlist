@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 
 const TrackDetails = ({ currentTrack }) => {
     const [memory, setMemory] = useState(null);
@@ -9,7 +9,6 @@ const TrackDetails = ({ currentTrack }) => {
         const getMemory = async () => {
             // Get song and memory description from the backend (MongoDB)
             try {
-                console.log("Current Track: ", currentTrack.song)
                 console.log("Current Track ID: ", currentTrack?.song?.id)
 
                 const response = await fetch(`http://localhost:5000/api/getMemory/${currentTrack.song.id}`);
@@ -17,6 +16,7 @@ const TrackDetails = ({ currentTrack }) => {
 
                 if (response.ok) {
                     setMemory(data);
+                    console.log("Current Memory: ", memory)
                 } else {
                     setMemory(null);
                 }
@@ -44,9 +44,25 @@ const TrackDetails = ({ currentTrack }) => {
                     <p><strong>Album:</strong> {currentTrack.song.album.name}</p>
                     {memory ? (
                         <div>
-                            <h3>Memory</h3>
-                            <p>{memory.memoryDescription}</p>
-                            <p><small>Added on: {new Date(memory.dateCreated).toLocaleDateString()}</small></p>
+                            <p style={{
+                                backgroundColor: "#e0e0e0", // Light gray bubble
+                                padding: "10px 15px",
+                                borderRadius: "15px",
+                                maxWidth: "60%", // Adjust width as needed
+                                wordWrap: "break-word",
+                                textAlign: "left",
+                                display: "inline-block",
+                            }}>
+                                {memory.memoryDescription}
+                            </p>
+                            <p><small>{new Date(memory.dateCreated).toLocaleString("en-US", {
+                                month: "numeric",
+                                day: "numeric",
+                                year: "2-digit", // Shortened year format
+                                hour: "numeric",
+                                minute: "2-digit",
+                                hour12: true, // Ensures AM/PM format
+                            })}</small></p>
                         </div> 
                     ) : (
                         <p>No memory added for this song.</p>

@@ -1,5 +1,4 @@
 import React from "react";
-import { AUTH_URL } from "../tokens/spotifyAuthorizationApi"; // Import the authorization URL from spotifyApi.js
 import Header from "./Header";
 
 const Home = () => (

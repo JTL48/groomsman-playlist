@@ -32,7 +32,7 @@ app.post("/api/add-memory", async (req, res) => {
     const database = client.db(db_name);
     const collection = database.collection("memories");
 
-    const newMemory = { songID, memoryDescription, createdAt: new Date() };
+    const newMemory = { songID, memoryDescription, dateCreated: new Date() };
     const result = await collection.insertOne(newMemory);
 
     res.status(200).json({ message: "Memory added successfully", result });
