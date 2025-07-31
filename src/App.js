@@ -6,6 +6,7 @@ import Callback from "./tokens/Callback";
 import AddMemory from "./components/AddMemory/AddMemory";
 import { AuthTokenProvider } from "./tokens/TokenContext";
 import TokenError from "./tokens/TokenError";
+import { ProtectedRoute, UserProvider } from "./components/userContext";
 
 function App() {
   return (
@@ -13,9 +14,17 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/playlist" element={<Playlist />} />
+          <Route path="/playlist" element={
+            <ProtectedRoute>
+              <Playlist />
+            </ProtectedRoute>}
+          />
+          <Route path="/memory" element={
+            <ProtectedRoute>
+              <AddMemory />
+            </ProtectedRoute>}
+          />
           <Route path="/callback" element={<Callback />} />
-          <Route path="/memory" element={<AddMemory />} />
           <Route path="/tokenerror" element={<TokenError />} />
         </Routes>
       </Router>

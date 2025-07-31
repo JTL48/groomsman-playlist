@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { SPOTIFY_CONFIG} from "../../config/config";
+import { useUser } from "../userContext";
 
 const SelectedSongInfo = ({ selectedSong, authToken }) => {
     const [alreadyInPlaylist, setAlreadyInPlaylist] = useState(false);
     const [memoryDescription, setMemoryDescription] = useState("");
+    const { user } = useUser();
 
     // Check if the song is already in the playlist when selectedSong changes
     useEffect(() => {
@@ -71,6 +73,7 @@ const SelectedSongInfo = ({ selectedSong, authToken }) => {
                 body: JSON.stringify({
                     songID: selectedSong.id,
                     memoryDescription: memoryDescription,
+                    username: user.username
                 }),
             });
 
