@@ -37,16 +37,18 @@ const Home = () => {
     return (
         <div>
         <Header />
+        <h1 style={{ textAlign: "center"}} >🎉 Welcome to Jacob's Bachelor Party Playlist 🎉</h1>
         {user ? (
-            <div style={{ textAlign: "center", maxWidth: "1000px", margin: "0 auto" }}>
-                <h1>Hello {user.display}</h1>
-                <h2>
-                    You made it to Jacob's Bachelor Playlist! I've put together a little interactive website all revolving around one of my favorite things in the world: Music! (Behind Beckers of course)
-                    I made a playlist with a bunch of songs that remind me of each one of you. With each song, there's a memory attached. Feel free to reply and add to it!
-                    If you have any songs that remind you of me (or really anyone else in the group), there's also a tab where you can add songs to the playlist along with your memory.
-                    The hope is, by the time we go on our bachelor trip, we'll have a crazy playlist of songs that we can party to at the cabin and reminisce about our journey together!
-                    You should have recieved a username and password. Login below to continue!
-                </h2>
+            <div style={{ textAlign: "center", margin: "0 auto" }}>
+                <h2>Hello {user.display}</h2>
+                <h3>
+                    I've put together a little interactive website all revolving around one of my favorite things in the world: Music! (Behind Beckers of course) 💍<br />
+                    A lot of you, I've met through the love of music! 🥁 So I felt this would be very fitting for this group! 🎸<br />
+                    I made a playlist full of songs that remind me of each one of you. With each song, there's a memory. Feel free to reply and add to the conversation!<br />
+                    If you have any songs that remind you of me (or anyone else in the group), there's the "Memory" tab where you can add songs to the playlist along with a description.<br />
+                    The hope is, by the time we go on our bachelor trip, we'll have a crazy playlist of songs that we can party to at the cabin and reminisce about our journey together!<br />
+                    If you're accessing this website, I want to thank you for being a lifelong friend! I wouldn't be where I am today without you all. Love y'all! ❤️
+                </h3>
                 <Link to="/playlist">
                     <button>
                         Playlist

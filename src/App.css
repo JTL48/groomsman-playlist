@@ -36,3 +36,48 @@
     transform: rotate(360deg);
   }
 }
+
+/* Memory Bubble (Outgoing) */
+.bubble-out {
+  background-color: #0047AB;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  display: inline-block;
+  max-width: 60%;
+  margin: 0px;
+}
+
+/* Memory Bubble (Incoming) */
+.bubble-in {
+  background-color: #E2725B;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 15px;
+  margin-bottom: 5px;
+  display: inline-block;
+  max-width: 60%;
+  margin: 0px;
+}
+
+/* Tail for received messages */
+.bubble-in::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -8px; /* Adjust as needed */
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid #E2725B; /* Matches bubble background */
+}
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

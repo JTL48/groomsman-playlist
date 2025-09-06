@@ -1,6 +1,9 @@
 import { useState, useEffect, memo } from "react";
 import { useUser } from "../userContext";
 import { getMouseEventOptions } from "@testing-library/user-event/dist/utils";
+import '../../App.css';
+import { motion } from "motion/react";
+
 
 const TrackDetails = ({ currentTrack }) => {
     const [memory, setMemory] = useState(null);
@@ -95,92 +98,38 @@ const TrackDetails = ({ currentTrack }) => {
                         const isSameUser = previousEntry && previousEntry.display === entry.display
                             
                         return (
-                            <div>
-                                {entry.username === user.username ? (
-                                    <div key={index} style={{ marginBottom: "10px", textAlign: "right" }}>
-                                        {!isSameUser && (
-                                            <div><small style={{
-                                            display: "inline-block",
-                                            fontSize: "11px",
-                                            color: "#888",
-                                            textAlign: "right",
-                                            maxWidth: "60%"
-                                            }}>
-                                                {entry.display}
-                                            </small></div>
-                                        )}
-                                        
-                                        <p style={{
-                                            backgroundColor: "#007aff", // imessage blue
-                                            color: "white",
-                                            padding: "10px 15px",
-                                            borderRadius: "15px",
-                                            maxWidth: "60%", // Adjust width as needed
-                                            wordWrap: "break-word",
-                                            textAlign: "left",
-                                            display: "inline-block",
-                                            margin: "0px"
-                                        }}>
-                                            {entry.text}
-                                        </p>
+                            <div key={index}>
+                                <div style={{ marginBottom: "10px", textAlign: entry.username === user.username ? "right" : "left" }}>
+                                    {!isSameUser && (
                                         <div><small style={{
-                                            display: "inline-block",
-                                            fontSize: "11px",
-                                            color: "#888",
-                                            textAlign: "right",
-                                            maxWidth: "60%"
+                                        display: "inline-block",
+                                        fontSize: "11px",
+                                        color: "#888",
+                                        textAlign: "right",
+                                        maxWidth: "60%"
                                         }}>
-                                        {new Date(entry.date).toLocaleString("en-US", {
-                                            month: "short",
-                                            day: "numeric",
-                                            year: "numeric", // Shortened year format
-                                            hour: "numeric",
-                                            minute: "2-digit",
-                                            hour12: true, // Ensures AM/PM format
-                                        })}</small></div>
-                                    </div>
-                                ) : (
-                                    <div key={index} style={{ marginBottom: "10px", textAlign: "left" }}>
-                                        {!isSameUser && (
-                                                <div><small style={{
-                                                display: "inline-block",
-                                                fontSize: "11px",
-                                                color: "#888",
-                                                textAlign: "right",
-                                                maxWidth: "60%"
-                                            }}>
-                                                {entry.display}
-                                            </small></div>
-                                        )}
-                                        <p style={{
-                                            backgroundColor: "#e0e0e0", // Light gray bubble
-                                            padding: "10px 15px",
-                                            borderRadius: "15px",
-                                            maxWidth: "60%", // Adjust width as needed
-                                            wordWrap: "break-word",
-                                            textAlign: "left",
-                                            display: "inline-block",
-                                            margin: "0px"
-                                        }}>
-                                            {entry.text}
-                                        </p>
-                                        <div><small style={{
-                                            display: "inline-block",
-                                            fontSize: "11px",
-                                            color: "#888",
-                                            textAlign: "right",
-                                            maxWidth: "60%"
-                                        }}>
-                                        {new Date(entry.date).toLocaleString("en-US", {
-                                            month: "short",
-                                            day: "numeric",
-                                            year: "numeric", // Shortened year format
-                                            hour: "numeric",
-                                            minute: "2-digit",
-                                            hour12: true, // Ensures AM/PM format
-                                        })}</small></div>
-                                    </div>
-                                )}
+                                            {entry.display}
+                                        </small></div>
+                                    )}
+                                    <motion.p initial={{ scale: 0 }} animate={{ scale: 1 }} className={entry.username === user.username ? "bubble-out" : "bubble-in"}>
+                                        {entry.text}
+                                    </motion.p>
+                                    <div><small style={{
+                                        display: "inline-block",
+                                        fontSize: "11px",
+                                        color: "#888",
+                                        textAlign: "right",
+                                        maxWidth: "60%"
+                                    }}>
+                                    {new Date(entry.date).toLocaleString("en-US", {
+                                        month: "short",
+                                        day: "numeric",
+                                        year: "numeric", // Shortened year format
+                                        hour: "numeric",
+                                        minute: "2-digit",
+                                        hour12: true, // Ensures AM/PM format
+                                    })}</small></div>
+                                </div>
                             </div>
                         );
                     })
