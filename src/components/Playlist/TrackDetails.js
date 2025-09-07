@@ -4,6 +4,8 @@ import { getMouseEventOptions } from "@testing-library/user-event/dist/utils";
 import '../../App.css';
 import { motion } from "motion/react";
 
+const api_url = process.env.REACT_APP_API_URL;
+
 
 const TrackDetails = ({ currentTrack }) => {
     const [memory, setMemory] = useState(null);
@@ -20,7 +22,7 @@ const TrackDetails = ({ currentTrack }) => {
         // Get song and memory description from the backend (MongoDB)
         try {
 
-            const response = await fetch(`http://localhost:5000/api/getMemory/${currentTrack.song.id}`);
+            const response = await fetch(api_url + `/api/getMemory/${currentTrack.song.id}`);
             const data = await response.json();
             console.log(data)
 
@@ -55,7 +57,7 @@ const TrackDetails = ({ currentTrack }) => {
     
             // Send song and memory description to the backend (MongoDB)
             try {
-                const replyResponse = await fetch("http://localhost:5000/api/add-reply", {
+                const replyResponse = await fetch(api_url + "/api/add-reply", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

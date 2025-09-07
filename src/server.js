@@ -5,9 +5,10 @@ require("dotenv").config();
 
 const app = express();
 const port = 5000;
+const app_url = process.env.REACT_APP_URL;
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: app_url,
   methods: ["GET", "POST"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));

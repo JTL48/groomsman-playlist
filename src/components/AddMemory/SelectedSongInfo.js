@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { SPOTIFY_CONFIG} from "../../config/config";
 import { useUser } from "../userContext";
 
+const api_url = process.env.REACT_APP_API_URL;
+
 const SelectedSongInfo = ({ selectedSong, authToken }) => {
     const [alreadyInPlaylist, setAlreadyInPlaylist] = useState(false);
     const [memoryDescription, setMemoryDescription] = useState("");
@@ -65,7 +67,7 @@ const SelectedSongInfo = ({ selectedSong, authToken }) => {
 
         // Send song and memory description to the backend (MongoDB)
         try {
-            const memoryResponse = await fetch("http://localhost:5000/api/add-memory", {
+            const memoryResponse = await fetch(api_url + "/api/add-memory", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

@@ -1,7 +1,9 @@
 import { SPOTIFY_CONFIG } from "../config/config";
 
+const app_url = process.env.REACT_APP_URL;
+
 const CLIENT_ID = SPOTIFY_CONFIG.CLIENT_ID; // Replace with your Spotify app's Client ID
-const REDIRECT_URI = "http://localhost:3000/callback"; // Spotify redirect URI
+const REDIRECT_URI = app_url + "/callback"; // Spotify redirect URI
 const SCOPES = "playlist-modify-public playlist-read-private playlist-read-collaborative";
 
 // Spotify Authorization URL
