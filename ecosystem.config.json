@@ -1,0 +1,23 @@
+{
+  "apps": [
+    {
+      "name": "react-client",
+      "script": "npx",
+      "args": "serve -s build -l 3000",
+      "cwd": "./",
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    {
+      "name": "express-api",
+      "script": "src/server.js",
+      "cwd": "./",
+      "interpreter": "node",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 5000
+      }
+    }
+  ]
+}
