@@ -49,7 +49,7 @@ const Home = () => {
                     I made a playlist full of songs that remind me of each one of you. With each song, there's a memory. Feel free to reply and add to the conversation!<br />
                     If you have any songs that remind you of me (or anyone else in the group), there's the "Memory" tab where you can add songs to the playlist along with a description.<br />
                     The hope is, by the time we go on our bachelor trip, we'll have a crazy playlist of songs that we can party to at the cabin and reminisce about our journey together!<br />
-                    If you're accessing this website, I want to thank you for being a lifelong friend! I wouldn't be where I am today without you all. Love y'all! ❤️
+                    If you're accessing this website, I want to thank you for being a lifelong friend! I wouldn't be where I am today without you all. Love y'all! ❤️ Fuck
                 </h3>
                 <Link to="/playlist">
                     <button>
