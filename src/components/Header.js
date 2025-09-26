@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useUser } from './userContext'
 
 const Header = () => {
-    const { user } = useUser();
+    const { user, logout } = useUser();
 
     return (
         <div style={{ padding: "10px", backgroundColor: "#333", color: "#fff", textAlign: "center" }}>
@@ -24,6 +24,23 @@ const Header = () => {
                     <div></div>
                 )}
             </nav>
+
+            {/* Right side: sign out button */}
+            {user && (
+                <button
+                    onClick={logout}
+                    style={{
+                        backgroundColor: "transparent",
+                        border: "1px solid #fff",
+                        color: "#fff",
+                        padding: "5px 15px",
+                        borderRadius: "5px",
+                        cursor: "pointer"
+                    }}
+                >
+                    Sign Out
+                </button>
+            )}
         </div>
     );
 };
