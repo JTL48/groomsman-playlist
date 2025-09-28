@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useClientToken } from "../../tokens/spotifyClientApi";
 import Header from "../Header";
-import SpotifyEmbed from "./SpotifyEmbed";
+import PlaylistObj from "./PlaylistObj";
 import TrackControls from "./TrackControls";
 import TrackDetails from "./TrackDetails";
 import { SPOTIFY_CONFIG } from "../../config/config";
@@ -11,6 +11,7 @@ const Playlist = () => {
     const [currentTrack, setCurrentTrack] = useState(null);
     const clientToken = useClientToken();
     const selectRef = useRef(null);
+    const [showDetails, setShowDetails] = useState(false);
 
     useEffect(() => {
         if (!clientToken) return;
@@ -45,6 +46,8 @@ const Playlist = () => {
                 index: tracks.findIndex(track => track.track.id === trackId),
             });
         }
+        
+        setShowDetails(true);
     };
 
     const previousTrackChange = () => {
@@ -63,12 +66,22 @@ const Playlist = () => {
         }
     };
 
+
     return (
-        <div>
-            <Header />
-            <div style={{ display: "flex", justifyContent: "space-between", padding: "20px" }}>
-                <SpotifyEmbed playlistId={SPOTIFY_CONFIG.PLAYLIST_ID} />
-                <div style={{ flex: 1, marginLeft: "20px", textAlign: "center" }}>
+        <div className="playlist-layout">
+            {/* Desktop: always two columns */}
+            {/* Mobile: conditionally show playlist OR details */}
+            {window.innerWidth > 768 ? (
+                <>
+                <div className="playlist-left">
+                    <PlaylistObj
+                    tracks={tracks}
+                    selectRef={selectRef}
+                    currentTrack={currentTrack}
+                    handleTrackChange={handleTrackChange}
+                    />
+                </div>
+                <div className="playlist-right">
                     <TrackControls
                         tracks={tracks}
                         selectRef={selectRef}
@@ -79,8 +92,34 @@ const Playlist = () => {
                     />
                     <TrackDetails currentTrack={currentTrack} />
                 </div>
+                </>
+            ) : (
+                <>
+                {!showDetails ? (
+                    <PlaylistObj
+                        tracks={tracks}
+                        selectRef={selectRef}
+                        currentTrack={currentTrack}
+                        handleTrackChange={handleTrackChange}
+                    />
+                ) : (
+                    <div className="playlist-details">
+                    <button onClick={() => setShowDetails(false)}>← Back to Playlist</button>
+                    <TrackControls
+                        tracks={tracks}
+                        selectRef={selectRef}
+                        currentTrack={currentTrack}
+                        handleTrackChange={handleTrackChange}
+                        previousTrackChange={previousTrackChange}
+                        nextTrackChange={nextTrackChange}
+                    />
+                    <TrackDetails currentTrack={currentTrack} />
+                    </div>
+                )}
+                </>
+            )}
             </div>
-        </div>
+
     );
 };
 

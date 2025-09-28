@@ -75,6 +75,35 @@
   border-right: 8px solid #E2725B; /* Matches bubble background */
 }
 
+/* Default: desktop layout */
+.playlist-layout {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.playlist-left {
+  flex: 1;
+}
+
+.playlist-right {
+  flex: 1;
+}
+
+/* Mobile override */
+@media (max-width: 768px) {
+  .playlist-layout {
+    flex-direction: column;
+  }
+
+  .playlist-left,
+  .playlist-right {
+    flex: none;
+    width: 100%;
+  }
+}
+
+
 
 
 @keyframes fadeIn {

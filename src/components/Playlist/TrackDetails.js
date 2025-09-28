@@ -85,14 +85,18 @@ const TrackDetails = ({ currentTrack }) => {
             <h2>Song Info</h2>
             {currentTrack ? (
                 <div>
-                    <img
-                        src={currentTrack.song.album.images[0].url}
-                        alt="Album Art"
-                        style={{ width: "100px", height: "100px", borderRadius: "8px" }}
-                    />
-                    <p><strong>Song:</strong> {currentTrack.song.name}</p>
-                    <p><strong>Artist(s):</strong> {currentTrack.song.artists.map(artist => artist.name).join(", ")}</p>
-                    <p><strong>Album:</strong> {currentTrack.song.album.name}</p>
+                    <iframe 
+                        data-testid="embed-iframe"
+                        style={{ borderRadius: "12px" }}
+                        src={`https://open.spotify.com/embed/track/${currentTrack.song.id}?utm_source=generator`} 
+                        width="100%"
+                        height="352"
+                        frameBorder="0"
+                        allowfullscreen="" 
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                    ></iframe>
+                    
                     {memory ? (
                         memory.entries.map((entry, index) => {
                         
