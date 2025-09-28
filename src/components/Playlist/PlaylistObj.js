@@ -14,7 +14,7 @@ const PlaylistObj = ({ tracks, selectRef, currentTrack, handleTrackChange }) => 
                 ))}
             </div>
         ) : (
-            <p>No playlist found this song.</p>
+            <p>No playlist found.</p>
         )}
     </div>
 );
