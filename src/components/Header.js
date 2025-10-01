@@ -47,7 +47,7 @@ const Header = () => {
                             padding: "0px 15px",
                             cursor: "pointer",
                             border: "none",
-                            fontSize: "14px",
+                            fontSize: "10px",
                         }}
                     >
                         Sign Out

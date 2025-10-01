@@ -3,6 +3,7 @@ import { useUser } from "../userContext";
 import { getMouseEventOptions } from "@testing-library/user-event/dist/utils";
 import '../../App.css';
 import { motion } from "motion/react";
+import { Button } from "react-bootstrap";
 
 const api_url = process.env.REACT_APP_API_URL;
 
@@ -82,7 +83,6 @@ const TrackDetails = ({ currentTrack }) => {
 
     return (
         <>
-            <h2>Song Info</h2>
             {currentTrack ? (
                 <div>
                     <iframe 
@@ -94,7 +94,7 @@ const TrackDetails = ({ currentTrack }) => {
                         frameBorder="0"
                         allowfullscreen="" 
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                        loading="lazy"
+                        loading="eager"
                     ></iframe>
                     
                     {memory ? (
@@ -150,12 +150,7 @@ const TrackDetails = ({ currentTrack }) => {
                             style={{ width: "100%", height: "100px", marginBottom: "10px" }}
                         />
                     </p>
-                    <button 
-                        onClick={handleAddButtonClick} 
-                        disabled={!replyDescription} // Disable if description is empty
-                    >
-                        Send Reply
-                    </button>
+                    <Button onClick={handleAddButtonClick} disabled={!replyDescription}>Send Reply</Button>
                 </div>
             ) : (
                 <p>Select a song from the dropdown to see details.</p>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "./Header";
 import { useUser } from './userContext'
 import { Link } from "react-router-dom";
+import { Container, Button } from "react-bootstrap";
 
 const api_url = process.env.REACT_APP_API_URL;
 
@@ -41,25 +42,24 @@ const Home = () => {
         <Header />
         <h1 style={{ textAlign: "center"}} >🎉 Welcome to Jacob's Bachelor Party Playlist 🎉</h1>
         {user ? (
-            <div style={{ textAlign: "center", margin: "0 auto" }}>
-                <h2>Hello {user.display}</h2>
-                <h3>
-                    I've put together a little interactive website all revolving around one of my favorite things in the world: Music! (Behind Beckers of course) 💍<br />
-                    A lot of you, I've met through the love of music! 🥁 So I felt this would be very fitting for this group! 🎸<br />
-                    I made a playlist full of songs that remind me of each one of you. With each song, there's a memory. Feel free to reply and add to the conversation!<br />
-                    If you have any songs that remind you of me (or anyone else in the group), there's the "Memory" tab where you can add songs to the playlist along with a description.<br />
-                    The hope is, by the time we go on our bachelor trip, we'll have a crazy playlist of songs that we can party to at the cabin and reminisce about our journey together!<br />
-                    If you're accessing this website, I want to thank you for being a lifelong friend! I wouldn't be where I am today without you all. Love y'all! ❤️
-                </h3>
+            <div style={{ textAlign: "center", margin: "0 auto", marginTop: "20px", maxWidth: "800px" }}>
+                <h2 className="text-center">Hello {user.display}</h2>
+                <div style={{ textAlign: "left", fontSize: "1.1rem", lineHeight: "1.6", padding: "10px" }}>
+                    <p>I've put together a little interactive website all revolving around one of my favorite things in the world: Music! (Behind Beckers of course) 💍</p>
+                    <p>I've met a lot of you through the love of music! 🥁 So I felt this would be very fitting for the group! 🎸</p>
+                    <p>I made a playlist full of songs that remind me of each one of you. With each song, there's a memory. Feel free to reply and add to the conversation!</p>
+                    <p>If you have any songs that remind you of me (or anyone else in the group), there's the "Memory" tab where you can add songs to the playlist along with a memory.</p>
+                    <p>The hope is, by the time we go on our bachelor trip, we'll have a crazy playlist of songs that we can party to at the cabin and reminisce about our journey together!</p>
+                    <p>If you're accessing this website, I want to thank you for being a lifelong friend! I wouldn't be where I am today without you all. Love y'all! ❤️</p>
+                </div>
+                <div className="text-center mt-3">
                 <Link to="/playlist">
-                    <button>
-                        Playlist
-                    </button>
+                    <Button variant="primary">🎶 Go to Playlist</Button>
                 </Link>
-                
+                </div>
             </div>
         ) : (
-            <div style={{ textAlign: "center", maxWidth: "400px", margin: "0 auto" }}>
+            <div className="login" style={{ textAlign: "center", maxWidth: "350px", margin: "0 auto" }}>
                 <form onSubmit={handleLogin} style={{ marginTop: "30px" }}>
                     <h3>Log In</h3>
 
@@ -68,7 +68,7 @@ const Home = () => {
                         placeholder="Username"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
-                        style={{ padding: "10px", margin: "10px 0", width: "100%", borderRadius: "6px" }}
+                        style={{ padding: "10px", margin: "10px -15px", width: "100%", borderRadius: "6px" }}
                         required
                     />
                     <input
@@ -76,12 +76,12 @@ const Home = () => {
                         placeholder="Password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        style={{ padding: "10px", margin: "10px 0", width: "100%", borderRadius: "6px" }}
+                        style={{ padding: "10px", margin: "10px -15px", width: "100%", borderRadius: "6px" }}
                         required
                     />
                     <button
                         type="submit"
-                        style={{ padding: "10px 20px", borderRadius: "6px", fontSize: "16px" }}
+                        style={{ padding: "10px 20px", borderRadius: "6px", fontSize: "16px", margin: '10px 0px' }}
                     >
                         Log In
                     </button>

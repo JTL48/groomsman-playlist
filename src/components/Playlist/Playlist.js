@@ -5,6 +5,7 @@ import PlaylistObj from "./PlaylistObj";
 import TrackControls from "./TrackControls";
 import TrackDetails from "./TrackDetails";
 import { SPOTIFY_CONFIG } from "../../config/config";
+import { Button } from "react-bootstrap";
 
 const Playlist = () => {
     const [tracks, setTracks] = useState([]);
@@ -46,7 +47,7 @@ const Playlist = () => {
                 index: tracks.findIndex(track => track.track.id === trackId),
             });
         }
-        
+
         setShowDetails(true);
     };
 
@@ -68,12 +69,15 @@ const Playlist = () => {
 
 
     return (
+        <>
+        <Header />
         <div className="playlist-layout">
             {/* Desktop: always two columns */}
             {/* Mobile: conditionally show playlist OR details */}
             {window.innerWidth > 768 ? (
                 <>
                 <div className="playlist-left">
+                    <h1 style={{textAlign: "center"}}>Bachelor Party Playlist</h1>
                     <PlaylistObj
                     tracks={tracks}
                     selectRef={selectRef}
@@ -96,29 +100,34 @@ const Playlist = () => {
             ) : (
                 <>
                 {!showDetails ? (
-                    <PlaylistObj
-                        tracks={tracks}
-                        selectRef={selectRef}
-                        currentTrack={currentTrack}
-                        handleTrackChange={handleTrackChange}
-                    />
+                    <div>
+                        <h1 style={{textAlign: "center"}}>Bachelor Party Playlist</h1>
+                        <PlaylistObj
+                            tracks={tracks}
+                            selectRef={selectRef}
+                            currentTrack={currentTrack}
+                            handleTrackChange={handleTrackChange}
+                        />
+                    </div>
                 ) : (
                     <div className="playlist-details">
-                    <button onClick={() => setShowDetails(false)}>← Back to Playlist</button>
-                    <TrackControls
-                        tracks={tracks}
-                        selectRef={selectRef}
-                        currentTrack={currentTrack}
-                        handleTrackChange={handleTrackChange}
-                        previousTrackChange={previousTrackChange}
-                        nextTrackChange={nextTrackChange}
-                    />
-                    <TrackDetails currentTrack={currentTrack} />
+                        <Button variant="primary" onClick={() => setShowDetails(false)}>← Back to Playlist</Button>
+                        <TrackControls
+                            tracks={tracks}
+                            selectRef={selectRef}
+                            currentTrack={currentTrack}
+                            handleTrackChange={handleTrackChange}
+                            previousTrackChange={previousTrackChange}
+                            nextTrackChange={nextTrackChange}
+                        />
+                        <TrackDetails currentTrack={currentTrack} />
                     </div>
                 )}
                 </>
             )}
             </div>
+
+        </>
 
     );
 };

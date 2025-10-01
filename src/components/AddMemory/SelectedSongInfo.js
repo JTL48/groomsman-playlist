@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { SPOTIFY_CONFIG} from "../../config/config";
 import { useUser } from "../userContext";
+import { Button } from "react-bootstrap";
 
 const api_url = process.env.REACT_APP_API_URL;
 
@@ -104,12 +105,7 @@ const SelectedSongInfo = ({ selectedSong, authToken }) => {
                                 onChange={handleDescriptionChange}
                                 style={{ width: "100%", height: "100px", marginBottom: "10px" }}
                             />
-                            <button 
-                                onClick={handleAddButtonClick} 
-                                disabled={!memoryDescription} // Disable if description is empty
-                            >
-                                Add to Playlist
-                            </button>
+                            <Button variant="primary" onClick={handleAddButtonClick} disabled={!memoryDescription}>Add to Playlist</Button>
                         </div>
                     )}
                 </>

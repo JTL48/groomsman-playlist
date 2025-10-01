@@ -103,6 +103,67 @@
   }
 }
 
+.btn-primary {
+  background-color: #0047AB; /* cobalt blue */
+  border-color: #0047AB;
+  color: #fff;
+  width: 100%;
+  border-radius: 8px;
+  height: 25px;
+  margin-bottom: 15px;
+}
+
+.btn-primary:hover {
+  background-color: #E2725B; /* mai tai */
+  border-color: #E2725B;
+  color: #fff;
+  width: 100%;
+  border-radius: 8px;
+  height: 25px;
+  margin-bottom: 15px;
+}
+
+.form-select {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  height: 25px;
+  width: 100%;
+}
+
+.track-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.track-controls select {
+  max-width: 400px;
+  flex: 1; /* Grow/shrink relative to space */
+}
+
+.track-controls button {
+  width: 30px;
+  margin-bottom: 0px;
+}
+.track-controls button:hover {
+  width: 30px;
+  margin-bottom: 0px;
+}
+
+/* Mobile override */
+@media (max-width: 768px) {
+  .track-controls select {
+    max-width: 200px;
+  }
+}
+
+/* Mobile override */
+@media (max-width: 768px) {
+  .login {
+    max-width: 200px;
+  }
+}
 
 
 
