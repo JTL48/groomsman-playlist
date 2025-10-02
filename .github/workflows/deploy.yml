@@ -46,3 +46,25 @@ jobs:
 
             # Restart PM2
             pm2 start ecosystem.config.json
+
+      - name: Add .htaccess to build folder
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          script: |
+            cd /home/deploy/groomsman-playlist/build
+            cat > .htaccess << 'EOF'
+            Options -Indexes +FollowSymLinks
+            RewriteEngine On
+            RewriteBase /
+            
+            # Don’t touch API calls
+            RewriteCond %{REQUEST_URI} !^/api
+            RewriteCond %{REQUEST_FILENAME} !-f
+            RewriteCond %{REQUEST_FILENAME} !-d
+            
+            RewriteRule ^ index.html [L]"
+            EOF
+
