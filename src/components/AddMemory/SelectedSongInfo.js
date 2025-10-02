@@ -8,6 +8,7 @@ const api_url = process.env.REACT_APP_API_URL;
 const SelectedSongInfo = ({ selectedSong, authToken }) => {
     const [alreadyInPlaylist, setAlreadyInPlaylist] = useState(false);
     const [memoryDescription, setMemoryDescription] = useState("");
+    const [addSongError, setAddSongError] = useState("");
     const { user } = useUser();
 
     // Check if the song is already in the playlist when selectedSong changes
@@ -44,6 +45,7 @@ const SelectedSongInfo = ({ selectedSong, authToken }) => {
     };
 
     const handleAddToPlaylist = async (memoryDescription) => {
+        setAddSongError("")
         if (!selectedSong || alreadyInPlaylist) return;
 
         const playlistId = SPOTIFY_CONFIG.PLAYLIST_ID;
@@ -62,32 +64,35 @@ const SelectedSongInfo = ({ selectedSong, authToken }) => {
         if (response.ok) {
             console.log("Song added to playlist!");
             setAlreadyInPlaylist(true);
+
+            // Send song and memory description to the backend (MongoDB)
+            try {
+                const memoryResponse = await fetch(api_url + "/api/add-memory", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        songID: selectedSong.id,
+                        memoryDescription: memoryDescription,
+                        username: user.username
+                    }),
+                });
+
+                const memoryData = await memoryResponse.json();
+                if (memoryData.message === "Memory added successfully") {
+                    console.log("Memory added to MongoDB");
+                }
+            } catch (error) {
+                console.error("Error adding memory to MongoDB:", error);
+                setAddSongError("Failed to add memory to database")
+            }
+
         } else {
             console.error("Failed to add song to playlist");
+            setAddSongError("Failed to add song to playlist")
         }
 
-        // Send song and memory description to the backend (MongoDB)
-        try {
-            const memoryResponse = await fetch(api_url + "/api/add-memory", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    songID: selectedSong.id,
-                    memoryDescription: memoryDescription,
-                    username: user.username
-                }),
-            });
-
-            const memoryData = await memoryResponse.json();
-            if (memoryData.message === "Memory added successfully") {
-                console.log("Memory added to MongoDB");
-            }
-        } catch (error) {
-            console.error("Error adding memory to MongoDB:", error);
-        }
-        
     };
     
     return (
@@ -108,6 +113,7 @@ const SelectedSongInfo = ({ selectedSong, authToken }) => {
                             <Button variant="primary" onClick={handleAddButtonClick} disabled={!memoryDescription}>Add to Playlist</Button>
                         </div>
                     )}
+                    {addSongError && <p style={{ color: "red", marginTop: "10px" }}>{addSongError}</p>}
                 </>
             ) : (
                 <p>Select a song to see details</p>

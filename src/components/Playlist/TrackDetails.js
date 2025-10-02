@@ -25,11 +25,11 @@ const TrackDetails = ({ currentTrack }) => {
 
             const response = await fetch(api_url + `/api/getMemory/${currentTrack.song.id}`);
             const data = await response.json();
-            console.log(data)
+            // console.log(data)
 
             if (response.ok) {
                 setMemory(data);
-                console.log("Current Memory: ", memory)
+                // console.log("Current Memory: ", memory)
             } else {
                 setMemory(null);
             }
